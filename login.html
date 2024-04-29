@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 & 注册</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: skyblue;
+        }
+
+        .container {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            perspective: 1000px;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+        }
+
+        .card.front {
+            transform: rotateY(0deg);
+        }
+
+        .card.back {
+            transform: rotateY(90deg);
+        }
+
+        .form {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form h2 {
+            margin-bottom: 20px;
+        }
+
+        .form input {
+            width: 80%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form {
+            /* 添加 flex 布局 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .form-buttons {
+            /* 将按钮放在一行并位于两端 */
+            display: flex;
+            justify-content: space-between;
+            width: 85%;
+            margin-top: 10px;
+        }
+
+        /* 修改回到主页面按钮的样式 */
+        .form .go-home-btn {
+            /* 将按钮放置在左上角 */
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #ccc;
+            /* 浅灰色背景 */
+            color: #333;
+            /* 文字颜色 */
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-buttons button {
+            /* 针对按钮样式进行调整 */
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card front">
+            <div class="form">
+                <button class="go-home-btn" onclick="goToHomePage()">回到主页面</button>
+                <h2>登录</h2>
+                <!-- 登录表单 -->
+                <input type="text" placeholder="用户名或邮箱" id="loginUsernameOrEmail">
+                <input type="password" placeholder="密码" id="loginPassword">
+                <!-- 按钮放置在一行的两端 -->
+                <div class="form-buttons">
+                    <!-- 增加回到主页面按钮 -->
+
+                    <button onclick="validateLoginForm()">登录</button>
+                    <button onclick="flipCard('login')">去注册</button>
+                </div>
+            </div>
+        </div>
+        <div class="card back">
+            <div class="form">
+                <button class="go-home-btn" onclick="goToHomePage()">回到主页面</button>
+                <h2>注册</h2>
+                <!-- 注册表单 -->
+                <input type="text" placeholder="用户名" id="registerUsername">
+                <input type="email" placeholder="邮箱" id="registerEmail">
+                <input type="password" placeholder="密码" id="registerPassword">
+                <input type="password" placeholder="确认密码" id="confirmPassword">
+                <!-- 按钮放置在一行的两端 -->
+                <div class="form-buttons">
+                    <!-- 增加回到主页面按钮 -->
+
+                    <button onclick="validateRegisterForm()">注册</button>
+                    <button onclick="flipCard('register')">去登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isFlipped = false;
+
+        // function flipCard(type) {
+        //     const frontCard = document.querySelector('.front');
+        //     const backCard = document.querySelector('.back');
+
+        //     if (isFlipped) {
+        //         if (type === 'login') {
+        //             document.getElementById('loginUsernameOrEmail').value = '';
+        //             document.getElementById('loginPassword').value = '';
+        //         } else if (type === 'register') {
+        //             document.getElementById('registerUsername').value = '';
+        //             document.getElementById('registerEmail').value = '';
+        //             document.getElementById('registerPassword').value = '';
+        //             document.getElementById('confirmPassword').value = '';
+        //         }
+
+        //         frontCard.style.transform = 'rotateY(0deg)';
+        //         backCard.style.transform = 'rotateY(90deg)';
+        //     } else {
+        //         frontCard.style.transform = 'rotateY(90deg)';
+        //         backCard.style.transform = 'rotateY(0deg)';
+        //     }
+
+        //     isFlipped = !isFlipped;
+        // }
+
+        // 根据'type'参数翻转卡片的函数
+        function flipCard(type) {
+            const frontCard = document.querySelector('.front');
+            const backCard = document.querySelector('.back');
+
+            if (isFlipped) {
+                // 如果卡片已翻转
+                if (type === 'login') {
+                    // 清除登录输入字段
+                    document.getElementById('loginUsernameOrEmail').value = '';
+                    document.getElementById('loginPassword').value = '';
+                } else if (type === 'register') {
+                    // 清除注册输入字段
+                    document.getElementById('registerUsername').value = '';
+                    document.getElementById('registerEmail').value = '';
+                    document.getElementById('registerPassword').value = '';
+                    document.getElementById('confirmPassword').value = '';
+                }
+
+                frontCard.style.transform = 'rotateY(0deg)';
+                backCard.style.transform = 'rotateY(90deg)';
+            } else {
+                // 如果卡片未翻转，则旋转以显示背面
+                frontCard.style.transform = 'rotateY(90deg)';
+                backCard.style.transform = 'rotateY(0deg)';
+
+                if (type === 'login') {
+                    // 清除登录输入字段
+                    document.getElementById('loginUsernameOrEmail').value = '';
+                    document.getElementById('loginPassword').value = '';
+                } else if (type === 'register') {
+                    // 清除注册输入字段
+                    document.getElementById('registerUsername').value = '';
+                    document.getElementById('registerEmail').value = '';
+                    document.getElementById('registerPassword').value = '';
+                    document.getElementById('confirmPassword').value = '';
+                }
+            }
+
+            isFlipped = !isFlipped;
+        }
+
+
+        // 函数用于验证登录表单
+        function validateLoginForm() {
+            // 获取用户名/邮箱和密码输入框的值
+            const usernameOrEmail = document.getElementById('loginUsernameOrEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // 检查是否有输入为空
+            if (usernameOrEmail.trim() === '' || password.trim() === '') {
+                // 如果有空输入，显示警告消息
+                alert('请输入邮箱和密码进行登录。');
+            } else {
+                // 如果输入不为空，显示登录成功消息
+                alert('登录成功！');
+
+                // 利用BOM，通过修改当前窗口的URL实现页面重定向至首页
+                window.location.href = './index.html';
+            }
+        }
+        function validateRegisterForm() {
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (
+                username.trim() === '' ||
+                email.trim() === '' ||
+                password.trim() === '' ||
+                confirmPassword.trim() === ''
+            ) {
+                alert('请填写所有字段进行注册。');
+            } else if (password !== confirmPassword) {
+                alert('确认密码与密码不匹配，请重新输入。');
+            } else {
+                alert('注册成功！');
+                // 这里可以添加注册逻辑，如提交表单等
+            }
+        }
+        function goToHomePage() {
+            // 利用BOM，通过修改当前窗口的URL实现页面重定向至主页面
+            window.location.href = './index.html';
+        }
+    </script>
+
+</body>
+
+</html>

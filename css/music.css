@@ -1,0 +1,30 @@
+.music-player {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .round-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: #3498db;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .play-icon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg); /* 初始化旋转角度为0 */
+    /* transition: transform 0.3s ease; 添加过渡效果 */
+  }
+  
+  
+  
+  
+  

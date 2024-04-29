@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简介</title>
+    <link rel="stylesheet" href="./css/personal.css">
+    <style>
+        #countdown {
+            margin-top: 20px;
+            font-size: 26px;
+            text-align: center;
+        }
+        .go-home-btn {
+            /* 将按钮放置在左上角 */
+            position: absolute;
+            top: 35px;
+            left: 35px;
+            background-color: #ffffff;
+            color: #333;
+            /* 文字颜色 */
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="section sec2 fp-section active fp-completely" id="section2" data-fp-styles="null" data-anchor="page2"
+        style="height: 825px; background-color: skyblue;">
+        <button class="go-home-btn" onclick="goToHomePage()">回到主页面</button>
+        <div class="sec2_main">
+            <div class="sec2_main_head">
+                <ul>
+                    <li class="current1">
+                        <a href="#">个人资料</a>
+                    </li>
+                    <li class=""><a href="#">个人图片</a></li>
+                    <li class=""><a href="#">个人技能</a></li>
+                    <li class=""><a href="#">个人QQ</a></li>
+                    <li class=""><a href="#">个人微信</a></li>
+                    <li class=""><a href="#">杂七杂八</a></li>
+                </ul>
+            </div>
+            <div class="sec2_main_body">
+                <div class="sec2_main_body_content hidden" style="display: block;">
+                    <div class="sec2_main_body_content_left">
+                        <p>姓名：贾振坤</p>
+                        <p>性别：男</p>
+                        <p>生日：2004/09/15</p>
+                        <p>爱好：吃饭,睡觉,写代码</p>
+                    </div>
+                    <div class="sec2_main_body_content_right">
+                        <img src="./images/personal/s-1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="sec2_main_body_content hidden" style="display: none;">
+                    <div class="sec2_main_body_content_left">
+                        <p>💘</p>
+                        <p>《起风了》</p>
+                        <p>💓</p>
+                    </div>
+                    <div class="sec2_main_body_content_right">
+                        <img src="./images/personal/s-2.jpg" alt="">
+                    </div>
+                </div>
+                <div class="sec2_main_body_content hidden" style="display: none;">
+                    <div class="sec2_main_body_content_left">
+                        <p>💘</p>
+                        <p>这一路上走走停停</p>
+                        <p>顺着少年漂流的痕迹</p>
+                        <p>迈出车站的前一刻</p>
+                        <p>竟有些犹豫</p>
+                        <p>不禁笑这近乡情怯</p>
+                        <p>仍无可避免，而长野的天</p>
+                        <p>依旧那么暖，风吹起了从前💕</p>
+                        <p>💓</p>
+                    </div>
+                    <div class="sec2_main_body_content_right">
+                        <img src="./images/personal/s-3.jpg" alt="">
+                    </div>
+                </div>
+                <div class="sec2_main_body_content hidden" style="display: none;">
+                    <div class="sec2_main_body_content_left">
+                        <p>💘</p>
+                        <p>QQ号: **********</p>
+                        <p>💓</p>
+                    </div>
+                    <div class="sec2_main_body_content_right">
+                        <img src="./images/personal/s-4.jpg" alt="">
+                    </div>
+                </div>
+                <div class="sec2_main_body_content hidden" style="display: none;">
+                    <div class="sec2_main_body_content_left">
+                        <p>💘</p>
+                        <p>落叶🍂知湫意</p>
+                        <p>微信：*********</p>
+                        <p>爱意💕随风起</p>
+                        <p>💓</p>
+                    </div>
+                    <div class="sec2_main_body_content_right">
+                        <img src="./images/personal/s-5.jpg" alt="">
+                    </div>
+                </div>
+                <div class="sec2_main_body_content hidden" style="display: none;">
+                    <div class="sec2_main_body_content_left">
+                        <p>💘</p>
+                        <p>太杂了，不知道说什么好！！！</p>
+                        <p>💓</p>
+                    </div>
+                    <div class="sec2_main_body_content_right">
+                        <img src="./images/personal/s-6.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="countdown"></div>
+    </div>
+    
+</body>
+
+</html>
+<script>
+
+    // JavaScript 代码处理选项卡切换
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.sec2_main_head li');
+        const tabContents = document.querySelectorAll('.sec2_main_body_content');
+
+        tabs.forEach(function (tab, index) {
+            tab.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                // 隐藏所有选项卡内容，添加过渡效果
+                tabContents.forEach(function (content) {
+                    content.style.transition = 'opacity 0.5s ease-in-out';
+                    content.style.opacity = '0';
+                    content.style.display = 'none';
+                });
+
+                // 从所有选项卡中移除 'current1' 类
+                tabs.forEach(function (tab) {
+                    tab.classList.remove('current1');
+                });
+
+                // 显示所选选项卡的内容并添加过渡效果
+                tabContents[index].style.display = 'block';
+                setTimeout(() => {
+                    tabContents[index].style.opacity = '1';
+                }, 100);
+
+                // 向所点击的选项卡添加 'current1' 类
+                this.classList.add('current1');
+            });
+        });
+    });
+
+    function updateCountdown() {
+        const springFestival = new Date('2024-02-10T00:00:00Z'); // 修改为对应的春节日期
+        const now = new Date();
+        const difference = springFestival - now;
+
+        if (difference <= 0) {
+            document.getElementById('countdown').innerHTML = '春节已经到来！';
+        } else {
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `
+          距离春节还有 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒
+        `;
+
+            setTimeout(updateCountdown, 1000);
+        }
+    }
+
+    window.onload = function () {
+        updateCountdown();
+    };
+
+    function goToHomePage() {
+            // 利用BOM，通过修改当前窗口的URL实现页面重定向至主页面
+            window.location.href = './index.html';
+        }
+
+
+</script>
